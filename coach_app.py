@@ -1,12 +1,15 @@
 import streamlit as st
+import os
 import plotly.express as px
 import pandas as pd
 pd.set_option('display.max_columns', None)
 
 ###################### LOAD IN THE DATA ##########################
 
-df = pd.read_csv("/Users/niklashemmer/PycharmProjects/coaches_analysis/data/streamlit.csv", index_col=None)
-df_summary = pd.read_csv("/Users/niklashemmer/PycharmProjects/coaches_analysis/data/coaches_summary.csv", index_col=None)
+file_path = os.path.join(os.path.dirname(__file__), "data", "streamlit.csv")
+df = pd.read_csv(file_path, index_col=None)
+file_path2 = os.path.join(os.path.dirname(__file__), "data", "coaches_summary.csv")
+df_summary = pd.read_csv(file_path2, index_col=None)
 big_five = ["FRA-Ligue 1", "ESP-La Liga", "GER-Bundesliga", "ITA-Serie A", "ENG-Premier League"]
 
 ###################### CREATE STREAMLIT APP ##########################
