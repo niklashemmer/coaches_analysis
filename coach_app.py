@@ -9,7 +9,7 @@ pd.set_option('display.max_columns', None)
 
 file_path = os.path.join(os.path.dirname(__file__), "data", "streamlit_22-12-17.csv")
 df = pd.read_csv(file_path, index_col=None)
-file_path2 = os.path.join(os.path.dirname(__file__), "data", "coaches_summary.csv")
+file_path2 = os.path.join(os.path.dirname(__file__), "data", "coaches_summary_22-12.17.csv")
 df_summary = pd.read_csv(file_path2, index_col=None)
 big_five = ["FRA-Ligue 1", "ESP-La Liga", "GER-Bundesliga", "ITA-Serie A", "ENG-Premier League"]
 
