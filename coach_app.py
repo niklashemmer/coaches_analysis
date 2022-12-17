@@ -107,9 +107,9 @@ fig.add_hrect(y0=0, y1=df_scatter["Difference"].max()+3, line_width=0, fillcolor
 
 # Add annotation to the rectangles
 if coach_scatter:
-    fig.add_annotation(text="Overachieved expectations", x=df_scatter["Matches"].min()+15, 
+    fig.add_annotation(text="Overachieved expectations", x=df_scatter["Matches"].min()+18, 
                        y=df_scatter["Difference"].max()-3, showarrow=False, font=dict(color="green", size=14))
-    fig.add_annotation(text="Underachieved expectations", x=df_scatter["Matches"].min()+15, 
+    fig.add_annotation(text="Underachieved expectations", x=df_scatter["Matches"].min()+18, 
                        y=df_scatter["Difference"].min()+3, showarrow=False, font=dict(color="red", size=14))
 else:
     fig.add_annotation(text="Overachieved expectations", x=df_scatter["Matches"].min() + 4,
