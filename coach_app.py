@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import datetime
 import plotly.express as px
 import pandas as pd
 pd.set_option('display.max_columns', None)
@@ -19,18 +20,29 @@ st.set_page_config(page_title="Plus/Minus Rating of Coaches", layout="wide")
 # --- SIDEBAR ---
 st.sidebar.header("Please Filter here:")
 
+# Get the current date and time
+now = datetime.datetime.now()
+
+# Format the date and time as a string
+last_updated = now.strftime("%b %d, %Y %I:%M %p")
+
+st.sidebar.write(f"Last updated: {last_updated}")
+
+# Get leagues
 league = st.sidebar.multiselect(
     "Select League:",
     options=df_summary["League"].unique(),
     default=big_five
 )
 
+# Get seasons
 season = st.sidebar.multiselect(
     "Select Season:",
     options=df_summary["Season"].sort_values().unique(),
     default=df_summary["Season"].sort_values().unique()
 )
 
+# Filter new dataframe
 df_summary_selection = df_summary.query(
     "League == @league & Season == @season"
 )
