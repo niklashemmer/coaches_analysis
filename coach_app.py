@@ -96,14 +96,26 @@ fig = px.scatter(
     height=600,
     #title="<b>Over-/underachievement of expected points per coach</b>",
     template="plotly_white",
-    hover_data=['Name']
+    hover_data=['Name'] if coach_scatter else ["Coach_ID"]
 )
 
 config = {'displayModeBar': False}
 
 # Add red and green rectangle do highlight over-/underperformance
-fig.add_hrect(y0=0, y1=df_scatter["Difference"].min()-2, line_width=0, fillcolor="red", opacity=0.1)
-fig.add_hrect(y0=0, y1=df_scatter["Difference"].max()+2, line_width=0, fillcolor="green", opacity=0.1)
+fig.add_hrect(y0=0, y1=df_scatter["Difference"].min()-3, line_width=0, fillcolor="red", opacity=0.07)
+fig.add_hrect(y0=0, y1=df_scatter["Difference"].max()+3, line_width=0, fillcolor="green", opacity=0.07)
+
+# Add annotation to the rectangles
+if coach_scatter:
+    fig.add_annotation(text="Overachieved expectations", x=df_scatter["Matches"].min()+15, 
+                       y=df_scatter["Difference"].max()-3, showarrow=False, font=dict(color="green", size=14))
+    fig.add_annotation(text="Underachieved expectations", x=df_scatter["Matches"].min()+15, 
+                       y=df_scatter["Difference"].min()+3, showarrow=False, font=dict(color="red", size=14))
+else:
+    fig.add_annotation(text="Overachieved expectations", x=df_scatter["Matches"].min() + 4,
+                       y=df_scatter["Difference"].max() - 1, showarrow=False, font=dict(color="green", size=14))
+    fig.add_annotation(text="Underachieved expectations", x=df_scatter["Matches"].min() + 4,
+                       y=df_scatter["Difference"].min() + 1, showarrow=False, font=dict(color="red", size=14))
 
 fig.add_hline(y=0)
 
@@ -113,7 +125,8 @@ fig.update_layout(
     plot_bgcolor="rgba(0,0,0,0)",
     xaxis=dict(
         range=[0, x.max()+1]
-    )
+    ),
+    font=dict(size=14)
 )
 
 st.plotly_chart(fig, use_container_width=True, use_container_height=True)
@@ -163,6 +176,7 @@ fig2.update_layout(
         range=[constant-20, constant+20],
         tickmode="auto"
     ),
+    font=dict(size=14)
 )
 
 fig2.update_traces(line=dict(color="black"))
