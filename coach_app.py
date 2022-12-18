@@ -84,16 +84,22 @@ st.write("##")
 # Enable to aggregate based on coaches' career performance
 coach_scatter = st.checkbox("Scatterplot with aggregated numbers (Check if you want to analyze coaches over their career instead of individual seasons)")
 
+# New datafame incl. filters
+df_scatter_filter = df_summary.query(
+    "League == @league & Season == @season"
+)
+
 if coach_scatter:
-    df_scatter = df_summary_selection.groupby(["Name"]).agg({
+    df_scatter = df_scatter_filter.groupby(["Name"]).agg({
         "Matches": "sum",
         "Expectation":"sum",
         "Result":"sum",
         "Difference":"sum"
     }).sort_values(by="Difference", ascending=False).reset_index()
 else:
-    df_scatter = df_summary_selection
+    df_scatter = df_scatter_filter
 
+# Plot scatter plot
 x = df_scatter["Matches"]
 y = df_scatter["Difference"].round(1)
 fig = px.scatter(
@@ -111,8 +117,6 @@ fig = px.scatter(
     hover_data=['Name'] if coach_scatter else ["Coach_ID"]
 )
 
-config = {'displayModeBar': False}
-
 # Add red and green rectangle do highlight over-/underperformance
 fig.add_hrect(y0=0, y1=df_scatter["Difference"].min()-3, line_width=0, fillcolor="red", opacity=0.07)
 fig.add_hrect(y0=0, y1=df_scatter["Difference"].max()+3, line_width=0, fillcolor="green", opacity=0.07)
@@ -129,8 +133,10 @@ else:
     fig.add_annotation(text="Underachieved expectations", x=df_scatter["Matches"].min() + 4,
                        y=df_scatter["Difference"].min() + 1, showarrow=False, font=dict(color="red", size=14))
 
+# Add horizontal line
 fig.add_hline(y=0)
 
+# Change marker of scatter plot
 fig.update_traces(marker_size=10, marker_color="#004CFF", marker_line_color="black")
 
 fig.update_layout(
