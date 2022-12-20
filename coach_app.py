@@ -193,6 +193,6 @@ fig2.update_traces(line=dict(color="#004CFF"))
 fig2.add_hline(y=constant,
                annotation_text="Expected points\nat season start",
                annotation_position="bottom right",
-               line_width=0.5)
+               line_width=0.8)
 
 st.plotly_chart(fig2, use_container_width=True)
