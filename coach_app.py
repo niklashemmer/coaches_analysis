@@ -15,7 +15,7 @@ big_five = ["FRA-Ligue 1", "ESP-La Liga", "GER-Bundesliga", "ITA-Serie A", "ENG-
 
 ###################### CREATE STREAMLIT APP ##########################
 
-st.set_page_config(page_title="Plus/Minus Rating of Coaches"), layout="wide")
+st.set_page_config(page_title="Plus/Minus Rating of Coaches", layout="wide")
 
 # --- SIDEBAR ---
 st.sidebar.header("Please Filter here:")
