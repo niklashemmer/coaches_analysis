@@ -134,7 +134,7 @@ fig.add_hline(y=0)
 fig.update_traces(marker_size=10, marker_color="#004CFF", marker_line_color="black")
 
 fig.update_layout(
-    paper_bgcolor="white",
+    plot_bgcolor="rgba(0,0,0,0)",
     xaxis=dict(
         range=[0, x.max()+1]
     ),
@@ -183,7 +183,7 @@ fig2 = px.line(
 
 # Update layout
 fig2.update_layout(
-    paper_bgcolor="white",
+    plot_bgcolor="rgba(0,0,0,0)",
     yaxis=dict(
         range=[constant-20, constant+20],
         tickmode="auto"
