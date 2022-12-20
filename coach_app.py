@@ -128,7 +128,7 @@ else:
 
 fig.add_hline(y=0)
 
-#fig.update_traces(marker_size=10, marker_color="#004CFF", marker_line_color="black")
+fig.update_traces(marker_size=7, marker_color="#004CFF", marker_line_color="black")
 
 fig.update_layout(
     plot_bgcolor="rgba(0,0,0,0)",
@@ -187,7 +187,7 @@ fig2.update_layout(
     font=dict(size=12)
 )
 
-#fig2.update_traces(line=dict(color="black"))
+fig2.update_traces(line=dict(color="#004CFF"))
 
 # Add horizontal line to illustrate expectations at the beginning
 fig2.add_hline(y=constant,
