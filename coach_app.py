@@ -187,7 +187,7 @@ fig2.update_layout(
     font=dict(size=12)
 )
 
-fig2.update_traces(line=dict(color="black"))
+#fig2.update_traces(line=dict(color="black"))
 
 # Add horizontal line to illustrate expectations at the beginning
 fig2.add_hline(y=constant,
