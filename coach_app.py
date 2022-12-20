@@ -111,7 +111,7 @@ fig = px.scatter(
         "y": "Over-/Underachievement",
         "Coach_ID":"Coach_ID"
     },
-    height=600,
+    #height=600,
     #title="<b>Over-/underachievement of expected points per coach</b>",
     template="plotly_white",
     hover_data=['Name'] if coach_scatter else ["Coach_ID"]
