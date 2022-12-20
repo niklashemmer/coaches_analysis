@@ -124,14 +124,14 @@ fig.add_hrect(y0=0, y1=df_scatter["Difference"].max()+3, line_width=0, fillcolor
 # Add annotation to the rectangles
 if coach_scatter:
     fig.add_annotation(text="Overachieved expectations", x=df_scatter["Matches"].min()+18, 
-                       y=df_scatter["Difference"].max()-3, showarrow=False, font=dict(color="green", size=14))
+                       y=df_scatter["Difference"].max()-3, showarrow=False, font=dict(color="green", size=12))
     fig.add_annotation(text="Underachieved expectations", x=df_scatter["Matches"].min()+18, 
-                       y=df_scatter["Difference"].min()+3, showarrow=False, font=dict(color="red", size=14))
+                       y=df_scatter["Difference"].min()+3, showarrow=False, font=dict(color="red", size=12))
 else:
     fig.add_annotation(text="Overachieved expectations", x=df_scatter["Matches"].min() + 4,
-                       y=df_scatter["Difference"].max() - 1, showarrow=False, font=dict(color="green", size=14))
+                       y=df_scatter["Difference"].max() - 1, showarrow=False, font=dict(color="green", size=12))
     fig.add_annotation(text="Underachieved expectations", x=df_scatter["Matches"].min() + 4,
-                       y=df_scatter["Difference"].min() + 1, showarrow=False, font=dict(color="red", size=14))
+                       y=df_scatter["Difference"].min() + 1, showarrow=False, font=dict(color="red", size=12))
 
 # Add horizontal line
 fig.add_hline(y=0)
@@ -144,7 +144,7 @@ fig.update_layout(
     xaxis=dict(
         range=[0, x.max()+1]
     ),
-    font=dict(size=14)
+    font=dict(size=12)
 )
 
 st.plotly_chart(fig, use_container_width=True, use_container_height=True)
@@ -194,7 +194,7 @@ fig2.update_layout(
         range=[constant-20, constant+20],
         tickmode="auto"
     ),
-    font=dict(size=14)
+    font=dict(size=12)
 )
 
 fig2.update_traces(line=dict(color="black"))
