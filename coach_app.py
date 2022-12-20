@@ -15,7 +15,7 @@ big_five = ["FRA-Ligue 1", "ESP-La Liga", "GER-Bundesliga", "ITA-Serie A", "ENG-
 
 ###################### CREATE STREAMLIT APP ##########################
 
-st.set_page_config(page_title="Plus/Minus Rating of Coaches")#, layout="wide")
+st.set_page_config(page_title="Plus/Minus Rating of Coaches"), layout="wide")
 
 # --- SIDEBAR ---
 st.sidebar.header("Please Filter here:")
@@ -28,21 +28,18 @@ last_updated = now.strftime("%b %d, %Y %I:%M %p")
 
 st.sidebar.write(f"Last updated: {last_updated}")
 
-# Get leagues
 league = st.sidebar.multiselect(
     "Select League:",
     options=df_summary["League"].unique(),
     default=big_five
 )
 
-# Get seasons
 season = st.sidebar.multiselect(
     "Select Season:",
     options=df_summary["Season"].sort_values().unique(),
     default=df_summary["Season"].sort_values().unique()
 )
 
-# Filter new dataframe
 df_summary_selection = df_summary.query(
     "League == @league & Season == @season"
 )
@@ -53,11 +50,8 @@ def main():
     # Set the background color to red
     st.markdown(
         """
-        <style>
-        body {
-            background-color: white;
-        }
-        </style>
+        <div style="background-color: yellow;">
+        </div>
         """,
         unsafe_allow_html=True,
     )
@@ -99,7 +93,6 @@ st.write("##")
 # Enable to aggregate based on coaches' career performance
 coach_scatter = st.checkbox("Scatterplot with aggregated numbers (Check if you want to analyze coaches over their career instead of individual seasons)")
 
-# New datafame incl. filters
 df_scatter_filter = df_summary.query(
     "League == @league & Season == @season"
 )
@@ -114,7 +107,6 @@ if coach_scatter:
 else:
     df_scatter = df_scatter_filter
 
-# Plot scatter plot
 x = df_scatter["Matches"]
 y = df_scatter["Difference"].round(1)
 fig = px.scatter(
@@ -126,21 +118,22 @@ fig = px.scatter(
         "y": "Over-/Underachievement",
         "Coach_ID":"Coach_ID"
     },
-    #height=600,
+    height=600,
     #title="<b>Over-/underachievement of expected points per coach</b>",
     template="plotly_white",
-    hover_data=['Name'] if coach_scatter else ["Coach_ID"]
+    hover_data=['Name'] if coach_scatter else ["Coach_ID"],
 )
+
+config = {'displayModeBar': False}
 
 # Add red and green rectangle do highlight over-/underperformance
 fig.add_hrect(y0=0, y1=df_scatter["Difference"].min()-3, line_width=0, fillcolor="red", opacity=0.07)
 fig.add_hrect(y0=0, y1=df_scatter["Difference"].max()+3, line_width=0, fillcolor="green", opacity=0.07)
 
-# Add annotation to the rectangles
 if coach_scatter:
-    fig.add_annotation(text="Overachieved expectations", x=df_scatter["Matches"].min()+18, 
+    fig.add_annotation(text="Overachieved expectations", x=df_scatter["Matches"].min()+15,
                        y=df_scatter["Difference"].max()-3, showarrow=False, font=dict(color="green", size=12))
-    fig.add_annotation(text="Underachieved expectations", x=df_scatter["Matches"].min()+18, 
+    fig.add_annotation(text="Underachieved expectations", x=df_scatter["Matches"].min()+15,
                        y=df_scatter["Difference"].min()+3, showarrow=False, font=dict(color="red", size=12))
 else:
     fig.add_annotation(text="Overachieved expectations", x=df_scatter["Matches"].min() + 4,
@@ -148,10 +141,8 @@ else:
     fig.add_annotation(text="Underachieved expectations", x=df_scatter["Matches"].min() + 4,
                        y=df_scatter["Difference"].min() + 1, showarrow=False, font=dict(color="red", size=12))
 
-# Add horizontal line
 fig.add_hline(y=0)
 
-# Change marker of scatter plot
 fig.update_traces(marker_size=10, marker_color="#004CFF", marker_line_color="black")
 
 fig.update_layout(
@@ -162,7 +153,7 @@ fig.update_layout(
     font=dict(size=12)
 )
 
-st.plotly_chart(fig, use_container_width=True, use_container_height=True)
+st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")
 
@@ -220,7 +211,7 @@ fig2.add_hline(y=constant,
                annotation_position="bottom right",
                line_width=0.5)
 
-st.plotly_chart(fig2, use_container_width=True, use_container_height=True)
+st.plotly_chart(fig2, use_container_width=True)
 
 if __name__ == "__main__":
     main()
