@@ -47,6 +47,21 @@ df_summary_selection = df_summary.query(
     "League == @league & Season == @season"
 )
 
+# --- BACKGROUND ---
+
+def main():
+    # Set the background color to red
+    st.markdown(
+        """
+        <style>
+        body {
+            background-color: white;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
 # --- HEADER ---
 
 # Set header and add explanation
@@ -206,3 +221,6 @@ fig2.add_hline(y=constant,
                line_width=0.5)
 
 st.plotly_chart(fig2, use_container_width=True, use_container_height=True)
+
+if __name__ == "__main__":
+    main()
