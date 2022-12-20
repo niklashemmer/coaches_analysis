@@ -44,18 +44,6 @@ df_summary_selection = df_summary.query(
     "League == @league & Season == @season"
 )
 
-# --- BACKGROUND ---
-
-def main():
-    # Set the background color to red
-    st.markdown(
-        """
-        <div style="background-color: yellow;">
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
 # --- HEADER ---
 
 # Set header and add explanation
@@ -146,7 +134,7 @@ fig.add_hline(y=0)
 fig.update_traces(marker_size=10, marker_color="#004CFF", marker_line_color="black")
 
 fig.update_layout(
-    plot_bgcolor="rgba(0,0,0,0)",
+    paper_bgcolor="white",
     xaxis=dict(
         range=[0, x.max()+1]
     ),
@@ -195,7 +183,7 @@ fig2 = px.line(
 
 # Update layout
 fig2.update_layout(
-    plot_bgcolor="rgba(0,0,0,0)",
+    paper_bgcolor="white",
     yaxis=dict(
         range=[constant-20, constant+20],
         tickmode="auto"
@@ -212,6 +200,3 @@ fig2.add_hline(y=constant,
                line_width=0.5)
 
 st.plotly_chart(fig2, use_container_width=True)
-
-if __name__ == "__main__":
-    main()
