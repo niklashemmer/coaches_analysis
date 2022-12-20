@@ -49,10 +49,7 @@ df_summary_selection = df_summary.query(
 # Set header and add explanation
 st.title("Plus/Minus Rating of Coaches")
 st.write("This tool compares the actual points of clubs to point predictions of FiveThirtyEight at the start of the season. Over- or underperformance is ascribed to the coaches. The data goes back to 2018/2019 and includes multiple leagues across Europe. The seasons and leagues can be filtered on the left side.") #The data table below shows coaches and their achievements per season. By checking the box, one can analyze coaches on an aggregated level of the past seasons. The chart at the bottom displays updated expectations over the course of one season.")
-st.markdown('''##### <span style="color:black">Evaluate football coaches based on their over-/underperformance of expected points</span>
-            ''', unsafe_allow_html=True)
-#tab_coach, tab_season = st.tabs(["Coach total", "Coach per Season"])
-
+st.subheader("Evaluate football coaches based on their over-/underperformance of expected points")
 
 # --- DATA TABLE ---
 
@@ -148,8 +145,7 @@ st.markdown("---")
 
 # --- PERFORMANCE LINE CHART ---
 
-st.markdown('''##### <span style="color:black">Tracking Performance: Updated expected points over a season</span>
-            ''', unsafe_allow_html=True)
+st.subheader("Tracking Performance: Updated expected points over a season")
 
 # Filter for coaches with at least 10 games per season
 df_10 = df.groupby("Coach_ID").agg({"Matches":"count"}).reset_index()
