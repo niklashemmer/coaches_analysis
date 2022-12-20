@@ -128,7 +128,7 @@ else:
 
 fig.add_hline(y=0)
 
-fig.update_traces(marker_size=10, marker_color="#004CFF", marker_line_color="black")
+#fig.update_traces(marker_size=10, marker_color="#004CFF", marker_line_color="black")
 
 fig.update_layout(
     plot_bgcolor="rgba(0,0,0,0)",
